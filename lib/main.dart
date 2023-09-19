@@ -47,36 +47,30 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Stack(
         children:[
-           Positioned(
-            top: 0,
-            left: 0,
-            child: IgnorePointer(
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.red,
-              ),
-            ),
-          ),
+           
            Center(
-          child: TextButton(
-            onPressed: () {
-              Toast.show("Toast plugin app", duration: Toast.lengthLong ,gravity: Toast.bottom);
-            },
-            child: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "Pink",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35,
-                      color: Colors.pink,
-                    ),
+          child: Column(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Toast.show("Toast plugin app", duration: Toast.lengthLong ,gravity: Toast.bottom);
+                },
+                child: RichText(
+                  text: const TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Pink",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 35,
+                          color: Colors.pink,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
 

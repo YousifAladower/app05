@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -24,38 +23,66 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- 
+  @override
+  void initState() {
+    super.initState();
+    ToastContext().init(context);
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Stack(
+        children:[
+           Positioned(
+            top: 0,
+            left: 0,
+            child: IgnorePointer(
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.red,
+              ),
+            ),
+          ),
+           Center(
+          child: TextButton(
+            onPressed: () {
+              Toast.show("Toast plugin app", duration: Toast.lengthLong ,gravity: Toast.bottom);
+            },
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: "Pink",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 35,
+                      color: Colors.pink,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
 
-        child: RichText(text: TextSpan(
-          children: [
-            TextSpan(text: "Pink",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35,color: Colors.pink))
-          ]
-        ))
-      )
-    // This trailing comma makes auto-formatting nicer for build methods.
+        ]
+        
+      ),
     );
   }
 }
